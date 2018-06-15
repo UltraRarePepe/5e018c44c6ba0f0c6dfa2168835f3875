@@ -5,7 +5,7 @@ pygame.init()
 
 
 #####################################          PUT YOUR USER HERE                   ############################################################
-user = "Yoni"
+user = "Jordan"
 ############################################    PUT YOUR USER HERE                        #################################################
 
 
@@ -42,6 +42,7 @@ bob = pygame.transform.scale(pygame.image.load(full_path("bob.png")),(62,128))
 bullet = pygame.image.load(full_path("rocket.png"))
 enemy = pygame.image.load(full_path("/enemy1/enemy1.png"))
 health_bar = pygame.image.load(full_path("health_5.png"))
+screen1 = pygame.image.load(full_path("open_screen.png"))
 pygame.display.set_caption(full_path('Beter eaT salami'))
 white = (255, 255, 255)
 black = (0, 0, 0,)
@@ -380,13 +381,13 @@ scr = 0
 for x in range(0,1000):
     auto_enemy()
 while scr == 0:
-    screen.blit(screen,(0,0))
+    screen.blit(screen1,(0,0))
     pygame.display.update()
     fpsClock.tick(fps)
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_c:
-                screen = pygame.image.load(full_path("credits.png"))
+                screen1 = pygame.image.load(full_path("credits.png"))
         if event.type == MOUSEBUTTONDOWN:
             scr = 1
         if event.type == QUIT:
