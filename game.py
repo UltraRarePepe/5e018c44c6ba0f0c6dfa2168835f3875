@@ -12,7 +12,7 @@ user = "Jordan"
 fps = 60
 health = 5
 fpsClock = pygame.time.Clock()
-
+creditsOn = False
 is_shot = False
 
 score = 0
@@ -387,7 +387,13 @@ while scr == 0:
     for event in pygame.event.get():
         if event.type == KEYDOWN:
             if event.key == K_c:
-                screen1 = pygame.image.load(full_path("credits.png"))
+                if creditsOn == False:
+                    screen1 = pygame.image.load(full_path("credits.png"))
+                    creditsOn = True
+            if event.key == K_d:
+                if creditsOn == True:
+                    screen1 = pygame.image.load(full_path("open_screen.png"))
+                    creditsOn = False
         if event.type == MOUSEBUTTONDOWN:
             scr = 1
         if event.type == QUIT:
