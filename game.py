@@ -1,5 +1,6 @@
 import sys, random, pygame, math, os, time
 from pygame.locals import *
+from os.path import expanduser
 pygame.init()
 
 fps = 60
@@ -24,7 +25,8 @@ sHeight = 600
 # def full_path(file):
 #     full_path = os.path.join.(APP_FOLDER, file)
 def full_path(file):
-    full_path = "/Users/Yoni/Desktop/bazooka_bob/GFX/"+file
+    home = expanduser("~")
+    full_path = os.path.join(home, "Desktop/bazooka-bob/GFX/" + file)
     return full_path
 screen = pygame.display.set_mode((width, height))
 floor = pygame.image.load(full_path("floor.png"))
