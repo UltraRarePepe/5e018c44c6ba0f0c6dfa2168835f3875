@@ -5,3 +5,13 @@ if self.padding >= 5:
         self.frame = 1
     enemy = pygame.transform.rotate(pygame.transform.flip(pygame.image.load(full_path("/enemy1/enemy" + str(self.frame) +".png")),True,False),self.slope)
     self.padding = 0
+
+
+
+
+
+
+##this does the angle that the enemies rotate to when they move
+##not sure if tis right
+##kill whitey
+self.slope = 360-math.atan2(self.move_y-bob_1.y,self.move_x-bob_1.x -15)*180/math.pi
