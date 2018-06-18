@@ -5,7 +5,7 @@ pygame.init()
 
 
 #####################################          PUT YOUR USER HERE                   ############################################################
-user = "Jordan"
+user = "Yoni"
 ############################################    PUT YOUR USER HERE                        #################################################
 
 
@@ -129,18 +129,19 @@ class enemyClass:
     def __init__(self):
         self.x = 0
         self.y = 0
-        self.w = 50 #change with current width
+        self.w = 100 #change with current width
         self.alive = True
         self.move_x = random.random()
         self.move_y = random.random()
         self.dist = 0
         self.padding = 0
-        self.frame = 1
+        self.frame = random.randint(1,5)
+        self.slope = 0
     def enemy_angle(self):
         if self.alive == True:
             self.move_x = random.random()
             self.move_y = random.random()
-            if (bob_1.y - 175) > self.y:
+            if (bob_1.y - 100) > self.y:
                 if bob_1.x < self.x:
                     self.move_x = -self.move_x
             else:
@@ -149,6 +150,9 @@ class enemyClass:
                     self.move_y = -self.move_y
                 else:
                     self.move_y = -self.move_y
+            #FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE 
+            self.slope = 0 #360-math.atan2(self.move_y-self.y,self.move_x-self.x )*180/math.pi
+            # print("slope:   " + str(self.slope))
 
     def enemy_pos(self):      
         if self.alive == True:
@@ -176,7 +180,7 @@ class enemyClass:
                     print(self.frame)
                 if self.frame >4:
                     self.frame = 1
-                enemy = pygame.image.load(full_path("/enemy1/enemy" + str(self.frame) +".png"))
+                enemy = pygame.transform.scale(pygame.transform.rotate(pygame.transform.flip(pygame.image.load(full_path("/enemy1/enemy" + str(self.frame) +".png")),True,False),self.slope),(100,100))
                 #end of test code
                 self.x += self.move_x * 2
                 self.y += self.move_y * 2
@@ -204,6 +208,7 @@ class enemyClass:
             health_bar = pygame.image.load(full_path("health_1.png"))            
         else:
             health_bar = pygame.image.load(full_path("health_0.png"))
+            #unload all my niggas here or just put a black screen idk lol
             msg("GAME OVER", 400, 300)
 
     def enemy_death(self):
@@ -217,8 +222,8 @@ class enemyClass:
             enemy_num -= 1
             
     def hideOffScreen(self):
-        self.x = -50
-        self.y = -50
+        self.x = -500
+        self.y = -50 * random.randint(1,100)
 
     def please_revive_i_have_raygun(self):
         self.alive = True
@@ -262,22 +267,12 @@ class bulletClass:
                 dSlope = 360-math.atan2(final_pos_y-bobtempy,final_pos_x-bobtempx -15)*180/math.pi
                 bulletR = pygame.transform.rotate(bullet,dSlope)
                 #end of test code
-                if((distance_x > 0) and (distance_y>0)):
-                    self.current_y -= dy *mult #* 4/3
+                if((distance_x > 0) and (distance_y>0)) or ((distance_x > 0) and (distance_y<0)):
+                    self.current_y -= dy *mult 
                     self.current_x -= dx *mult 
-                # if((distance_x < 0) and (distance_y>0)):
-                #     self.current_y += slope #* 4/3
-                #     self.current_x -= 1/slope
-                # if((distance_x > 0) and (distance_y<0)):
-                #     self.current_y -= slope #* 4/3
-                #     self.current_x += 1/slope
-                elif((distance_x > 0) and (distance_y<0)):
-                    self.current_x -= dx * mult
-                    self.current_y -= dy * mult
                 else:
                     self.current_x += dx *mult
                     self.current_y += dy *mult
-                
             else:
                 is_shot = False
         else:
