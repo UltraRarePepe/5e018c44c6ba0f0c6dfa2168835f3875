@@ -170,12 +170,13 @@ class enemyClass:
             if self.dist < 100:
                 #test code
                 self.padding += 1
-                if self.padding == 5:
-                self.frame += 1
+                if self.padding == 50:
+                    self.frame += 1
+                    self.padding = 0
+                    print(self.frame)
                 if self.frame >4:
                     self.frame = 1
                 enemy = pygame.image.load(full_path("/enemy1/enemy" + str(self.frame) +".png"))
-                    self.padding = 0
                 #end of test code
                 self.x += self.move_x * 2
                 self.y += self.move_y * 2
