@@ -207,13 +207,14 @@ class enemyClass:
             msg("GAME OVER", 400, 300)
 
     def enemy_death(self):
-        global score, is_shot, wave_score
+        global score, is_shot, wave_score, enemy_num
         if ((bulletInst.current_x < self.x + 50 and bulletInst.current_x > self.x) and (bulletInst.current_y < self.y + 50 and bulletInst.current_y > self.y) and is_shot == True):
             score += 1
             wave_score += 1
             is_shot = False
             self.alive = False
             self.hideOffScreen()
+            enemy_num -= 1
             
     def hideOffScreen(self):
         self.x = -50
