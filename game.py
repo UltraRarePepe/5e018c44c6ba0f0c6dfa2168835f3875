@@ -150,9 +150,16 @@ class enemyClass:
                     self.move_y = -self.move_y
                 else:
                     self.move_y = -self.move_y
-            #FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE FIX SLOPE 
-            self.slope = 0 #360-math.atan2(self.move_y-self.y,self.move_x-self.x )*180/math.pi
-            # print("slope:   " + str(self.slope))
+            #rip x hope he beats my dead wife in the afterlife; fuck you sharon i hope you're rolling in your grave
+            self.slope = 270-math.atan2(self.move_y,self.move_x)*180/math.pi
+            print("slope:   " + str(self.slope))
+            if self.slope >= 270 and self.slope <= 360:
+                self.slope -= 90
+                print("new coke:   " + str(self.slope))
+            elif self.slope >= 180 and self.slope <= 270:
+                self.slope += 90
+                print("new coke:   " + str(self.slope))
+
 
     def enemy_pos(self):      
         if self.alive == True:
