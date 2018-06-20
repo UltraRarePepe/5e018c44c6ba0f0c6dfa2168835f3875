@@ -137,6 +137,8 @@ class enemyClass:
         self.padding = 0
         self.frame = random.randint(1,5)
         self.slope = 0
+        self.type =str(random.randint(1,2))
+        self.typeset = False
     def enemy_angle(self):
         if self.alive == True:
             self.move_x = random.random()
@@ -167,6 +169,9 @@ class enemyClass:
     def enemy_pos(self):      
         if self.alive == True:
             side = random.randint(0,2)
+            if self.typeset == False:
+                self.type = random.randint(1,2)
+                self.type = True
             if side == 0:
                 self.x = random.randint(0 -self.w,800)
                 self.y = 0
@@ -192,7 +197,7 @@ class enemyClass:
                     self.frame = 1
                 # self.slope = 360-math.atan2(self.y-self.move_y,self.x-self.move_x)*180/math.pi
                 # print("slope:   " + str(self.slope))
-                enemy = pygame.transform.rotate(pygame.transform.scale(pygame.transform.flip(pygame.image.load(full_path("/enemy2/enemy" + str(self.frame) +".png")),True,False),(100,100)),self.slope)
+                enemy = pygame.transform.rotate(pygame.transform.scale(pygame.transform.flip(pygame.image.load(full_path("/enemy"+self.type+"/enemy" + str(self.frame) +".png")),True,False),(100,100)),self.slope)
                 #end of test code
                 self.x += self.move_x * 2
                 self.y += self.move_y * 2
