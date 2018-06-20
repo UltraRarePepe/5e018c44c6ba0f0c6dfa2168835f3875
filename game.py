@@ -129,7 +129,7 @@ class enemyClass:
     def __init__(self):
         self.x = 0
         self.y = 0
-        self.w = 100 #change with current width
+        self.w = 75 #change with current width
         self.alive = True
         self.move_x = random.random()
         self.move_y = random.random()
