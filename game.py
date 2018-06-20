@@ -192,7 +192,7 @@ class enemyClass:
                     self.frame = 1
                 # self.slope = 360-math.atan2(self.y-self.move_y,self.x-self.move_x)*180/math.pi
                 # print("slope:   " + str(self.slope))
-                enemy = pygame.transform.scale(pygame.transform.rotate(pygame.transform.flip(pygame.image.load(full_path("/enemy2/enemy" + str(self.frame) +".png")),True,False),self.slope),(100,100))
+                enemy = pygame.transform.rotate(pygame.transform.scale(pygame.transform.flip(pygame.image.load(full_path("/enemy2/enemy" + str(self.frame) +".png")),True,False),(100,100)),self.slope)
                 #end of test code
                 self.x += self.move_x * 2
                 self.y += self.move_y * 2
