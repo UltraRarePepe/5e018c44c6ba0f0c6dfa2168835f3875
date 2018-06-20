@@ -71,7 +71,7 @@ class bobClass:
         self.move = 0
         self.x = 0
         self.y = 372
-        self.w = 62
+        self.w = 55
         self.jump = 0
         self.jump_factor = 30
         self.shoot = 0
