@@ -24,8 +24,8 @@ leg_frame = 0
 
 #Loading sprites
 width, height = (800, 600)
-sWidth = 800
-sHeight = 600
+screenWidth = 800
+screenHeight = 600
 # APP_FOLDER = os.path.dirname.(os.path.realpath.(sys.argv[0]))
 
 # def full_path(file):
@@ -71,7 +71,7 @@ class bobClass:
         self.move = 0
         self.x = 0
         self.y = 372
-        self.w = 50
+        self.w = 62
         self.jump = 0
         self.jump_factor = 30
         self.shoot = 0
@@ -141,25 +141,28 @@ class enemyClass:
         if self.alive == True:
             self.move_x = random.random()
             self.move_y = random.random()
+            
             if (bob_1.y - 100) > self.y:
                 if bob_1.x < self.x:
                     self.move_x = -self.move_x
+                    
             else:
                 if bob_1.x < self.x:
                     self.move_x = -self.move_x
                     self.move_y = -self.move_y
+                    
                 else:
                     self.move_y = -self.move_y
-            #rip x hope he beats my dead wife in the afterlife; fuck you sharon i hope you're rolling in your grave
-            self.slope = 270-math.atan2(self.move_y,self.move_x)*180/math.pi
-            print("slope:   " + str(self.slope))
-            if self.slope >= 270 and self.slope <= 360:
-                self.slope -= 90
-                print("new coke:   " + str(self.slope))
-            elif self.slope >= 180 and self.slope <= 270:
-                self.slope += 90
-                print("new coke:   " + str(self.slope))
+                    
+            self.slope = 270 - math.atan2(self.move_y,self.move_x)*180/math.pi
 
+            print("slope:   " + str(self.slope))
+            # if self.slope >= 270 and self.slope <= 360:
+            #     self.slope -= 90
+            #     print("new coke:   " + str(self.slope))
+            # elif self.slope >= 180 and self.slope <= 270:
+            #     self.slope += 90
+            #     print("new coke:   " + str(self.slope))
 
     def enemy_pos(self):      
         if self.alive == True:
@@ -181,13 +184,15 @@ class enemyClass:
             if self.dist < 100:
                 #test code
                 self.padding += 1
-                if self.padding == 50:
+                if self.padding == 10:
                     self.frame += 1
                     self.padding = 0
-                    print(self.frame)
+                    # print(self.frame)
                 if self.frame >4:
                     self.frame = 1
-                enemy = pygame.transform.scale(pygame.transform.rotate(pygame.transform.flip(pygame.image.load(full_path("/enemy1/enemy" + str(self.frame) +".png")),True,False),self.slope),(100,100))
+                # self.slope = 360-math.atan2(self.y-self.move_y,self.x-self.move_x)*180/math.pi
+                # print("slope:   " + str(self.slope))
+                enemy = pygame.transform.scale(pygame.transform.rotate(pygame.transform.flip(pygame.image.load(full_path("/enemy2/enemy" + str(self.frame) +".png")),True,False),self.slope),(100,100))
                 #end of test code
                 self.x += self.move_x * 2
                 self.y += self.move_y * 2
@@ -200,7 +205,7 @@ class enemyClass:
         global health_bar
         global health
         ##start = 0
-        if ((bob_1.x < self.x + 30 and bob_1.x > self.x - 30) and (bob_1.y < self.y + 30 and bob_1.y > self.y - 30)):
+        if ((bob_1.x < self.x + self.w and bob_1.x > self.x - self.w) and (bob_1.y < self.y + self.w and bob_1.y > self.y - self.w)):
             health -= 1
             self.enemy_pos()
         if health == 5:
@@ -215,12 +220,11 @@ class enemyClass:
             health_bar = pygame.image.load(full_path("health_1.png"))            
         else:
             health_bar = pygame.image.load(full_path("health_0.png"))
-            #unload all my niggas here or just put a black screen idk lol
             msg("GAME OVER", 400, 300)
 
     def enemy_death(self):
         global score, is_shot, wave_score, enemy_num
-        if ((bulletInst.current_x < self.x + 50 and bulletInst.current_x > self.x) and (bulletInst.current_y < self.y + 50 and bulletInst.current_y > self.y) and is_shot == True):
+        if ((bulletInst.current_x < self.x + self.w and bulletInst.current_x > self.x) and (bulletInst.current_y < self.y + self.w and bulletInst.current_y > self.y) and is_shot == True):
             score += 1
             wave_score += 1
             is_shot = False
@@ -244,6 +248,7 @@ class bulletClass:
         self.current_x = bob_1.x + (bob_1.w/2)
         self.current_y = bob_1.y + (bob_1.w/2)
         is_shot = False
+        self.w = 15
     def bullet_load(self):
         global distance_x, distance_y, final_pos_x, final_pos_y, final_pos
         final_pos = str(pygame.mouse.get_pos())
@@ -267,11 +272,11 @@ class bulletClass:
             if slope == 0:
                 slope = .001
             mult=5 #make slower for rocket
-            if (self.current_x < 850 and self.current_x > -50 and self.current_y > -50 and self.current_y <500 - 50): #change for bullet size
+            if (self.current_x < 800 + self.w and self.current_x > -self.w and self.current_y > -self.w and self.current_y <500 - self.w): #change for bullet size
                 dx= math.cos((math.atan(slope)))
                 dy= math.sin((math.atan(slope)))
                 #test code (FIX ROCKET ANGLE, IT IS SLIGHTLY OFF)
-                dSlope = 360-math.atan2(final_pos_y-bobtempy,final_pos_x-bobtempx -15)*180/math.pi
+                dSlope = 360-math.atan2(final_pos_y-bobtempy,final_pos_x-bobtempx)*180/math.pi
                 bulletR = pygame.transform.rotate(bullet,dSlope)
                 #end of test code
                 if((distance_x > 0) and (distance_y>0)) or ((distance_x > 0) and (distance_y<0)):
@@ -280,6 +285,7 @@ class bulletClass:
                 else:
                     self.current_x += dx *mult
                     self.current_y += dy *mult
+                
             else:
                 is_shot = False
         else:
@@ -347,7 +353,7 @@ def do_waves():
         wave_num += 1
         wave_score = 0
         wave_size = round(wave_size * 1.25)
-        wave_size_dead = wave_size + score
+        wave_size_dead = wave_size + score + 1
         ma = wave_size_dead
         enemy_all()
 
