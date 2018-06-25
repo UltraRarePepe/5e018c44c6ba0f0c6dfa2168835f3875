@@ -301,11 +301,13 @@ class bulletClass:
 bullet_1 = None
 bulletInst = bullet_1
 bulletInst = bulletClass()
-bullet_num = 1
+bullet_num = 0
 def auto_bullet():
     global bullet_num, bulletInst
     bullet_num += 1
     globals()["bullet_" + str(bullet_num)] = bulletInst
+    ammo.append("bullet_" + str(bullet_num))
+    #print(ammo)
     bulletInst = bulletClass()
     
 enemy_1 = None
@@ -460,12 +462,15 @@ while scr == 1:
             #     bob_1.bob_down()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if is_shot == False:
+                if bullet_num >= 5:
+                    bullet_num = 0
                 bobtempx= bob_1.x
                 bobtempy= bob_1.y
-                bulletInst.bullet_load()
+                globals()[ammo[bullet_num]].bullet_load()
+                print(ammo[bullet_num])
                 is_shot = True
-                auto_bullet()
-
+                #auto_bullet()
+                bullet_num +=1
 
 
 pygame.display.update()
