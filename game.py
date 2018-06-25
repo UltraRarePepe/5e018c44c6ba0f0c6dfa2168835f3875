@@ -3,13 +3,19 @@ from pygame.locals import *
 from os.path import expanduser
 pygame.init()
 
+#####################################          PUT YOUR USER HERE                   ############################################################
+user = "Yoni"
+#########################################      PUT YOUR USER HERE              ############################################################
 
+
+
+##################################### DOESNT WORK ON WINDOW ##########################
 ###INSTALATION INSTRUCTIONS###
 # 1) Rename folder "Bazooka Bob"
 # 2) Bethany please I just want one weekend with the kids
 # 3) Put folder in Application Support 
 # 4) Last time I goddamn checked BETHANY you were the one who cheated on me you were the one who left bobby at the park for three hours alone because you wanted to watch Fifty Shades Darker with your dumb fucking friends bethany let me see my goddamn kids 
-
+#################### ^^^^^^^^^^^^^^^^^^^^^^^^ BIG GAY ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ##########################
 
 fps = 60
 health = 5
@@ -35,7 +41,11 @@ screenHeight = 600
 def full_path(file):
     #home = expanduser("~")
     #full_path = os.path.join(home, "Desktop/bazooka-bob/GFX/" + file)
-    full_path = "/Library/Application Support/Bazooka Bob/GFX/" + file
+    #full_path = "/Library/Application Support/Bazooka Bob/GFX/" + file
+    
+    
+    #just use the one that works for both of us for now mac boy
+    full_path = "/Users/" + user + "/Desktop/bazooka_bob/GFX/" + file
     return full_path
 
 screen = pygame.display.set_mode((width, height))
